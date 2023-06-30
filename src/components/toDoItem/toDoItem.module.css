@@ -1,0 +1,25 @@
+.checkbox {
+	width: 20px;
+	height: 20px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-right: 10px;
+}
+
+.checkboxChecked {
+	width: 20px;
+	height: 20px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-right: 10px;
+	background-image: url("./assets/checked-icon.svg");
+	background-size: contain;
+}
+
+.todoText:first-letter {
+	text-transform: uppercase;
+}
+
+.todoText:hover {
+	color: #3AB37C;
+}
