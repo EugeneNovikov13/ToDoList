@@ -1,3 +1,13 @@
+.todoItem {
+	display: flex;
+	align-items: center;
+	padding: 5px 0;
+}
+
+.todoItem:not(:last-child) {
+	border-bottom: 1px solid #ccc;
+}
+
 .checkbox {
 	width: 20px;
 	height: 20px;

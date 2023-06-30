@@ -1,29 +1,42 @@
-import { useEffect, useState } from 'react';
-import { ToDoItem } from './components';
+import { useState } from 'react';
+import { ToDoItem, AddingInput } from './components';
+import {
+	useRequestGetToDos,
+	useRequestAddToDo,
+	useRequestUpdateToDo,
+	useRequestDeleteToDo,
+} from './hooks';
 import styles from './app.module.css';
 
 export const App = () => {
-	const [toDo, setToDo] = useState([]);
+	const [refreshList, setRefreshList] = useState(false);
 
-	useEffect(() => {
-		fetch('https://jsonplaceholder.typicode.com/todos')
-			.then(loadedData => loadedData.json())
-			.then(loadedToDos => {
-				setToDo(loadedToDos);
-			});
-	}, []);
+	const { toDoList } = useRequestGetToDos(refreshList);
+
+	const { requestAddToDo } = useRequestAddToDo(refreshList, setRefreshList);
+
+	const { requestUpdateToDo, isUpdating } = useRequestUpdateToDo(
+		refreshList,
+		setRefreshList,
+	);
+
+	const { requestDeleteToDo, isDeleting } = useRequestDeleteToDo(
+		refreshList,
+		setRefreshList,
+	);
 
 	return (
 		<div className={styles.todoList}>
-			<h4 className={styles.header}>Запланированные дела</h4>
-			{toDo.map(
-				({ userId, id, title, completed }) =>
-					userId === 1 && (
-						<div key={id} className={styles.todoItem}>
-							<ToDoItem completed={completed} title={title} />
-						</div>
-					),
-			)}
+			<AddingInput requestAddToDo={requestAddToDo} />
+			{toDoList.map(({ id, text, completed }) => (
+				<ToDoItem key={id} completed={completed} text={text} />
+			))}
+			<button disabled={isUpdating} onClick={requestUpdateToDo}>
+				Сохранить
+			</button>
+			<button disabled={isDeleting} onClick={requestDeleteToDo}>
+				Удалить запись
+			</button>
 		</div>
 	);
 };

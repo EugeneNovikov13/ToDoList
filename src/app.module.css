@@ -12,13 +12,3 @@
 	margin: 0;
 	text-decoration: underline;
 }
-
-.todoItem {
-	display: flex;
-	align-items: center;
-	padding: 5px 0;
-}
-
-.todoItem:not(:last-child) {
-	border-bottom: 1px solid #ccc;
-}
