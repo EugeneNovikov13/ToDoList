@@ -1,26 +1,24 @@
 import { useState } from 'react';
 
 export const useRequestUpdateToDo = (refreshList, setRefreshList) => {
-	const [isUpdating, setIsUpdating] = useState(false);
 
-	const requestUpdateToDo = () => {
-		setIsUpdating(true);
+	const requestUpdateToDo = (id, val, checked) => {
 
-		fetch('http://localhost:3004/todos/002', {
+		const url = 'http://localhost:3004/todos/' + id;
+
+		fetch(url, {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json;charset=utf-8' },
 			body: JSON.stringify({
-				name: 'Смартфон',
-				price: 17900,
+				text: val,
+				completed: checked,
 			}),
 		})
 			.then(rawResponse => rawResponse.json())
 			.then(response => {
-				console.log('Список обновлён, ответ сервера:', response);
 				setRefreshList(!refreshList);
 			})
-			.finally(() => setIsUpdating(false));
 	};
 
-	return { requestUpdateToDo, isUpdating };
+	return { requestUpdateToDo };
 };

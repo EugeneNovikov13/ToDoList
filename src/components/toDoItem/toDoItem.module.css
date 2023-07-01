@@ -14,6 +14,7 @@
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	margin-right: 10px;
+	cursor: pointer;
 }
 
 .checkboxChecked {
@@ -24,6 +25,11 @@
 	margin-right: 10px;
 	background-image: url("./assets/checked-icon.svg");
 	background-size: contain;
+	cursor: pointer;
+}
+
+.todoText {
+	width: 350px;
 }
 
 .todoText:first-letter {
@@ -32,4 +38,29 @@
 
 .todoText:hover {
 	color: #3AB37C;
+	cursor: pointer;
+}
+
+.editedItem {
+	padding: 0;
+	width: 350px;
+	border-color: transparent;
+	font-size: 16px;
+	color: #3AB37C;
+}
+
+.editedItem:focus {
+	outline:none;
+}
+
+.delete {
+	width: 20px;
+	height: 20px;
+	background-image: url("./assets/delete-icon.svg");
+	background-size: contain;
+}
+
+.delete:hover {
+	background-image: url("./assets/delete-icon-hover.svg");
+	cursor: pointer;
 }

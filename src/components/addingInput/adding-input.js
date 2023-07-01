@@ -1,34 +1,41 @@
 import styles from './adding-input.module.css';
 import { useState } from 'react';
 
-export const AddingInput = ({ requestAddToDo }) => {
+export const AddingInput = ({ activeAddInput, setActiveAddInput, requestAddToDo }) => {
 	const [value, setValue] = useState('');
-	const [isCreating, setIsCreating] = useState(false);
+	const [isEmptyValue, setIsEmptyValue] = useState(true);
 
 	const onChange = ({ target }) => {
-		target.value.length > 0 ? setIsCreating(false) : setIsCreating(true);
+		target.value.length > 0 ? setIsEmptyValue(false) : setIsEmptyValue(true);
 		setValue(target.value);
 	};
 
-	const onClick = () => {
+	const onEnterKeyUp = (e) => {
+		if (e.key === 'Enter') {
+			onAddButtonClick();
+		}
+	}
+
+	const onAddButtonClick = () => {
 		requestAddToDo(value);
 		setValue('');
+		setIsEmptyValue(true);
 	};
 
 	return (
-		<div>
-			<input
-				className={styles.newToDoInput}
-				id="newToDo"
-				type="text"
-				name="newToDo"
-				placeholder="Новое дело"
-				value={value}
-				onChange={onChange}
-			></input>
-			<button disabled={isCreating} onClick={onClick}>
-				Добавить запись
+		<>
+			<button className={styles.addButton} disabled={isEmptyValue} onClick={onAddButtonClick}>
+				+
 			</button>
-		</div>
+			<input
+				className={activeAddInput ? `${styles.activeAddInput}` : `${styles.addInput}`}
+				type="text"
+				placeholder="Добавить..."
+				value={value}
+				onFocus={() => setActiveAddInput(true)}
+				onChange={onChange}
+				onKeyUp={(e) => onEnterKeyUp(e)}
+			></input>
+		</>
 	);
 };

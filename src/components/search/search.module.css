@@ -1,0 +1,22 @@
+.searchInput {
+    box-sizing: border-box;
+    width: 100px;
+	height: 40px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding-left: 10px;
+}
+
+.activeSearchInput {
+	box-sizing: border-box;
+    width: 200px;
+	height: 40px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding-left: 10px;
+}
+
+.searchInput:focus, .activeSearchInput:focus {
+	outline: none;
+	border: 2px solid #3AB37C;
+}

@@ -1,21 +1,16 @@
 import { useState } from 'react';
 
 export const useRequestDeleteToDo = (refreshList, setRefreshList) => {
-	const [isDeleting, setIsDeleting] = useState(false);
 
-	const requestDeleteToDo = () => {
-		setIsDeleting(true);
+	const requestDeleteToDo = (id) => {
 
-		fetch('http://localhost:3004/todos/003', {
+		const url = 'http://localhost:3004/todos/' + id;
+
+		fetch(url, {
 			method: 'DELETE',
 		})
-			.then(rawResponse => rawResponse.json())
-			.then(response => {
-				console.log('Дело удалено, ответ сервера:', response);
-				setRefreshList(!refreshList);
-			})
-			.finally(() => setIsDeleting(false));
+			.then(() => setRefreshList(!refreshList))
 	};
 
-	return { requestDeleteToDo, isDeleting };
+	return { requestDeleteToDo };
 };

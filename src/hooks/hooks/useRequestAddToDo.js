@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { v1 as uuidv1 } from 'uuid';
 
 export const useRequestAddToDo = (refreshList, setRefreshList) => {
 	const requestAddToDo = val => {
-		// setIsCreating(true);
 		const id = uuidv1();
 
 		fetch('http://localhost:3004/todos', {
@@ -17,12 +15,9 @@ export const useRequestAddToDo = (refreshList, setRefreshList) => {
 		})
 			.then(rawResponse => rawResponse.json())
 			.then(response => {
-				console.log('Дело добавлено. Ответ сервера: ', response);
 				setRefreshList(!refreshList);
 			});
-		// .finally(() => setIsCreating(false));
 	};
 
-	// return { requestAddToDo, isCreating };
 	return { requestAddToDo };
 };

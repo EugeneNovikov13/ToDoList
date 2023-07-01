@@ -1,0 +1,37 @@
+.addInput {
+	box-sizing: border-box;
+    width: 100px;
+	height: 40px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding-left: 10px;
+}
+
+.activeAddInput {
+	box-sizing: border-box;
+    width: 200px;
+	height: 40px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding-left: 10px;
+}
+
+.addInput:focus, .activeAddInput:focus {
+	outline: none;
+	border: 2px solid #3AB37C;
+}
+
+.addButton {
+	width: 40px;
+	height: 40px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	font-size: 34px;
+	background-color: white;
+}
+
+.addButton:enabled {
+	color: #3AB37C;
+	border: 2px solid #3AB37C;
+	cursor: pointer;
+}

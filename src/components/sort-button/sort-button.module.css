@@ -1,0 +1,27 @@
+.sortButton {
+	width: 40px;
+	height: 40px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	font-size: 34px;
+	background-color: white;
+	background-image: url("./assets/sort_alphabetical_icon.svg");
+	background-size: contain;
+}
+
+.sortButton:hover {
+	border: 2px solid #3AB37C;
+	cursor: pointer;
+}
+
+.sortButtonSorted {
+	width: 40px;
+	height: 40px;
+	border: 2px solid #3AB37C;
+	border-radius: 3px;
+	font-size: 34px;
+	background-color: white;
+	background-image: url("./assets/sort_alphabetical_icon-hover.svg");
+	background-size: contain;
+
+}
