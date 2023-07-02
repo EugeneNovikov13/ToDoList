@@ -1,3 +1,24 @@
 {
-  "todos": []
+  "todos": {
+    "5c5e9270-18d0-11ee-a4f7-0fe139ef53fc": {
+      "text": "Помыть посуду",
+      "completed": false
+    },
+    "6059b4e0-18d0-11ee-a4f7-0fe139ef53fc": {
+      "text": "Убраться в комнате",
+      "completed": false
+    },
+    "63e74870-18d0-11ee-a4f7-0fe139ef53fc": {
+      "text": "Купить хлеб",
+      "completed": false
+    },
+    "69c35fe0-18d0-11ee-a4f7-0fe139ef53fc": {
+      "text": "Найти курсы",
+      "completed": false
+    },
+    "71dc20e0-18d0-11ee-a4f7-0fe139ef53fc": {
+      "text": "Вскопать грядку",
+      "completed": false
+    }
+  }
 }

@@ -10,19 +10,18 @@ import {ToDoItem, AddingInput, Search, SortButton} from './components';
 import styles from './app.module.css';
 
 export const App = () => {
-    const [refreshList, setRefreshList] = useState(false);
     const [activeAddInput, setActiveAddInput] = useState(true);
     const [sorted, setSorted] = useState(false);
 
-    const {toDoList, setToDoList, requestGetToDos} = useRequestGetToDos(refreshList);
+    const {toDoList, setToDoList} = useRequestGetToDos();
 
-    const {requestAddToDo} = useRequestAddToDo(refreshList, setRefreshList);
+    const {requestAddToDo} = useRequestAddToDo();
 
-    const {requestUpdateTextToDo} = useRequestUpdateTextToDo(refreshList, setRefreshList);
+    const {requestUpdateTextToDo} = useRequestUpdateTextToDo();
 
-    const {requestUpdateCheckedToDo} = useRequestUpdateCheckedToDo(refreshList, setRefreshList);
+    const {requestUpdateCheckedToDo} = useRequestUpdateCheckedToDo();
 
-    const {requestDeleteToDo} = useRequestDeleteToDo(refreshList, setRefreshList);
+    const {requestDeleteToDo} = useRequestDeleteToDo();
 
     return (
         <div className={styles.todoList}>
@@ -39,13 +38,14 @@ export const App = () => {
                     setActiveAddInput={setActiveAddInput}
                 />
                 <SortButton
-                    requestGetToDos={requestGetToDos}
                     sorted={sorted}
                     setSorted={setSorted}
+                    toDoList={toDoList}
+                    setToDoList={setToDoList}
                 />
             </div>
 
-            {toDoList.map(({id, text, completed}) => (
+            {Object.entries(toDoList).map(([id, {text, completed}]) => (
                 <ToDoItem
                     key={id}
                     id={id}

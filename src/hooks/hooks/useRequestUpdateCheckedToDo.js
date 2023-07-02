@@ -1,19 +1,19 @@
-export const useRequestUpdateCheckedToDo = (refreshList, setRefreshList) => {
+import {ref, update} from 'firebase/database';
+import {db} from '../../firebase';
+
+export const useRequestUpdateCheckedToDo = () => {
 
 	const requestUpdateCheckedToDo = (id, checked) => {
 
-		const url = 'http://localhost:3004/todos/' + id;
+		const path = 'todos/' + id;
 
-		fetch(url, {
-			method: 'PATCH',
-			headers: { 'Content-Type': 'application/json;charset=utf-8' },
-			body: JSON.stringify({
+		const toDoCheckedRef = ref(db, path);
+
+		update(toDoCheckedRef, {
 				completed: checked,
-			}),
-		})
-			.then(rawResponse => rawResponse.json())
+			})
 			.then(response => {
-				setRefreshList(!refreshList);
+				console.log('Обновлена запись');
 			})
 	};
 

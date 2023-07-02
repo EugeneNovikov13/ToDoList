@@ -1,19 +1,19 @@
-export const useRequestUpdateTextToDo = (refreshList, setRefreshList) => {
+import {ref, update} from 'firebase/database';
+import {db} from '../../firebase';
+
+export const useRequestUpdateTextToDo = () => {
 
 	const requestUpdateTextToDo = (id, val) => {
 
-		const url = 'http://localhost:3004/todos/' + id;
+		const path = 'todos/' + id;
 
-		fetch(url, {
-			method: 'PATCH',
-			headers: { 'Content-Type': 'application/json;charset=utf-8' },
-			body: JSON.stringify({
+		const toDoTextRef = ref(db, path);
+
+		update(toDoTextRef, {
 				text: val,
-			}),
-		})
-			.then(rawResponse => rawResponse.json())
+			})
 			.then(response => {
-				setRefreshList(!refreshList);
+				console.log('Обновлена запись');
 			})
 	};
 

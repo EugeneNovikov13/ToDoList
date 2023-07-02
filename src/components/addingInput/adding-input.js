@@ -17,9 +17,11 @@ export const AddingInput = ({ activeAddInput, setActiveAddInput, requestAddToDo 
 	}
 
 	const onAddButtonClick = () => {
-		requestAddToDo(value);
-		setValue('');
-		setIsEmptyValue(true);
+		if (value.length > 0) {
+			requestAddToDo(value);
+			setValue('');
+			setIsEmptyValue(true);
+		}
 	};
 
 	return (

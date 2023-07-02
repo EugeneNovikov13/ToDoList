@@ -1,14 +1,17 @@
-export const useRequestDeleteToDo = (refreshList, setRefreshList) => {
+import {ref, remove} from 'firebase/database';
+import {db} from '../../firebase';
 
-	const requestDeleteToDo = (id) => {
+export const useRequestDeleteToDo = () => {
 
-		const url = 'http://localhost:3004/todos/' + id;
+    const requestDeleteToDo = (id) => {
 
-		fetch(url, {
-			method: 'DELETE',
-		})
-			.then(() => setRefreshList(!refreshList))
-	};
+        const path = 'todos/' + id;
 
-	return { requestDeleteToDo };
+        const toDoItemRef = ref(db, path);
+
+        remove(toDoItemRef)
+            .then(() => console.log('Запись удалена'))
+    };
+
+    return {requestDeleteToDo};
 };

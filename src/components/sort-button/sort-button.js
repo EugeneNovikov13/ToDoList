@@ -1,14 +1,18 @@
+import {ref, get} from 'firebase/database';
+import {db} from '../../firebase';
+import {sortObjectByValue} from '../../utils/utils';
 import styles from './sort-button.module.css';
 
-export const SortButton = ({requestGetToDos, sorted, setSorted}) => {
+export const SortButton = ({sorted, setSorted, toDoList, setToDoList}) => {
 
     const onClick = () => {
         if (sorted) {
-            requestGetToDos();
+            const toDoDbRef = ref(db, 'todos');
+            get(toDoDbRef)
+                .then((data) => setToDoList(data.val()))
             setSorted(false);
-        }
-        else {
-            requestGetToDos('http://localhost:3004/todos?_sort=text&_order=asc');
+        } else {
+            setToDoList(sortObjectByValue(toDoList));
             setSorted(true);
         }
     }
