@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 export const useRequestDeleteToDo = (refreshList, setRefreshList) => {
 
 	const requestDeleteToDo = (id) => {

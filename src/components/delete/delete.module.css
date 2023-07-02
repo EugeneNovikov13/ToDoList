@@ -1,0 +1,11 @@
+.delete {
+	width: 20px;
+	height: 20px;
+	background-image: url("./assets/delete-icon.svg");
+	background-size: contain;
+}
+
+.delete:hover {
+	background-image: url("./assets/delete-icon-hover.svg");
+	cursor: pointer;
+}

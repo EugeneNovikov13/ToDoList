@@ -1,0 +1,20 @@
+.checkbox {
+	width: 20px;
+	height: 20px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.checkboxChecked {
+	width: 20px;
+	height: 20px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-right: 10px;
+	background-image: url("./assets/checked-icon.svg");
+	background-size: contain;
+	cursor: pointer;
+}
+

@@ -1,0 +1,11 @@
+.editedItem {
+	padding: 0;
+	width: 350px;
+	border-color: transparent;
+	font-size: 16px;
+	color: #3AB37C;
+}
+
+.editedItem:focus {
+	outline:none;
+}

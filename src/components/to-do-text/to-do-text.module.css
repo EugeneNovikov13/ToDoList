@@ -1,0 +1,12 @@
+.todoText {
+	width: 350px;
+}
+
+.todoText:first-letter {
+	text-transform: uppercase;
+}
+
+.todoText:hover {
+	color: #3AB37C;
+	cursor: pointer;
+}

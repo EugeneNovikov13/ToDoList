@@ -1,16 +1,13 @@
-import { useState } from 'react';
+export const useRequestUpdateCheckedToDo = (refreshList, setRefreshList) => {
 
-export const useRequestUpdateToDo = (refreshList, setRefreshList) => {
-
-	const requestUpdateToDo = (id, val, checked) => {
+	const requestUpdateCheckedToDo = (id, checked) => {
 
 		const url = 'http://localhost:3004/todos/' + id;
 
 		fetch(url, {
-			method: 'PUT',
+			method: 'PATCH',
 			headers: { 'Content-Type': 'application/json;charset=utf-8' },
 			body: JSON.stringify({
-				text: val,
 				completed: checked,
 			}),
 		})
@@ -20,5 +17,5 @@ export const useRequestUpdateToDo = (refreshList, setRefreshList) => {
 			})
 	};
 
-	return { requestUpdateToDo };
+	return { requestUpdateCheckedToDo };
 };

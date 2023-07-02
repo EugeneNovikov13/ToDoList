@@ -24,7 +24,11 @@ export const AddingInput = ({ activeAddInput, setActiveAddInput, requestAddToDo 
 
 	return (
 		<>
-			<button className={styles.addButton} disabled={isEmptyValue} onClick={onAddButtonClick}>
+			<button
+				className={styles.addButton}
+				disabled={isEmptyValue}
+				onClick={onAddButtonClick}
+			>
 				+
 			</button>
 			<input
