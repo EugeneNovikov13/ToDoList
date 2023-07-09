@@ -1,11 +1,12 @@
 import {useState} from 'react';
 import styles from './checkbox.module.css';
 
-export const Checkbox = ({id, completed, requestUpdateCheckedToDo}) => {
+export const Checkbox = ({id, completed, edited, requestUpdateCheckedToDo }) => {
 
     const [checkedState, setCheckedState] = useState(completed);
 
     const onCheckboxClick = () => {
+        if (!edited) return
         setCheckedState(!checkedState);
         requestUpdateCheckedToDo(id, !checkedState);
     }

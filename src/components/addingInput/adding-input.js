@@ -14,12 +14,14 @@ export const AddingInput = ({ activeAddInput, setActiveAddInput, requestAddToDo 
 		if (e.key === 'Enter') {
 			onAddButtonClick();
 		}
-	}
+	};
 
 	const onAddButtonClick = () => {
+		if (value.length === 0) return;
 		requestAddToDo(value);
 		setValue('');
 		setIsEmptyValue(true);
+
 	};
 
 	return (
@@ -33,8 +35,8 @@ export const AddingInput = ({ activeAddInput, setActiveAddInput, requestAddToDo 
 			</button>
 			<input
 				className={activeAddInput ? `${styles.activeAddInput}` : `${styles.addInput}`}
-				type="text"
-				placeholder="Добавить..."
+				type='text'
+				placeholder='Добавить...'
 				value={value}
 				onFocus={() => setActiveAddInput(true)}
 				onChange={onChange}

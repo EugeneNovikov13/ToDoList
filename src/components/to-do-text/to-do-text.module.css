@@ -1,5 +1,9 @@
 .todoText {
-	width: 350px;
+	width: 370px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	text-decoration: none;
 }
 
 .todoText:first-letter {
@@ -9,4 +13,12 @@
 .todoText:hover {
 	color: #3AB37C;
 	cursor: pointer;
+	overflow: inherit;
+	white-space: inherit;
+	text-overflow: inherit;
+}
+
+.toDoLink {
+	text-decoration: none;
+	color: inherit;
 }

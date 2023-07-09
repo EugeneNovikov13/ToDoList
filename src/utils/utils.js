@@ -15,3 +15,7 @@ export const search = (val, showSearchResult) => {
             showSearchResult(filteredResult);
         });
 }
+
+export const getTimeStamp = () => {
+    return (new Date).toLocaleString()
+}

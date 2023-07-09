@@ -1,8 +1,10 @@
 import { v1 as uuidv1 } from 'uuid';
+import { getTimeStamp } from '../../utils/utils';
 
 export const useRequestAddToDo = (refreshList, setRefreshList) => {
 	const requestAddToDo = val => {
 		const id = uuidv1();
+		const timeStamp = getTimeStamp();
 
 		fetch('http://localhost:3004/todos', {
 			method: 'POST',
@@ -11,6 +13,7 @@ export const useRequestAddToDo = (refreshList, setRefreshList) => {
 				id: id,
 				text: val,
 				completed: false,
+				changedTimeStamp: timeStamp,
 			}),
 		})
 			.then(rawResponse => rawResponse.json())

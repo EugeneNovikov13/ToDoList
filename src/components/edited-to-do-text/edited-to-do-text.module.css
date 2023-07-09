@@ -1,0 +1,12 @@
+.editedToDoText {
+	width: 350px;
+}
+
+.editedToDoText:first-letter {
+	text-transform: uppercase;
+}
+
+.editedToDoText:hover {
+	color: #3AB37C;
+	cursor: pointer;
+}
