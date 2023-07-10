@@ -5,15 +5,15 @@ import { SortButton } from '../sort-button/sort-button';
 import { ToDoItem } from '../to-do-item/to-do-item';
 
 export const ToDoList = ({
-							 toDoList,
-							 setToDoList,
-							 activeAddInput,
-							 setActiveAddInput,
-							 sorted,
-							 setSorted,
-							 requestAddToDo,
-							 requestGetToDos,
-						 }) => {
+	toDoList,
+	setToDoList,
+	activeAddInput,
+	setActiveAddInput,
+	sorted,
+	setSorted,
+	requestAddToDo,
+	requestGetToDos,
+}) => {
 	return (
 		<div className={styles.todoList}>
 			<div className={styles.buttonWrapper}>
@@ -21,12 +21,14 @@ export const ToDoList = ({
 					activeAddInput={activeAddInput}
 					setActiveAddInput={setActiveAddInput}
 					requestAddToDo={requestAddToDo}
+					setSorted={setSorted}
 				/>
 
 				<Search
 					setToDoList={setToDoList}
 					activeAddInput={activeAddInput}
 					setActiveAddInput={setActiveAddInput}
+					setSorted={setSorted}
 				/>
 				<SortButton
 					requestGetToDos={requestGetToDos}
@@ -41,6 +43,7 @@ export const ToDoList = ({
 					id={id}
 					completed={completed}
 					text={text}
+					setSorted={setSorted}
 				/>
 			))}
 		</div>

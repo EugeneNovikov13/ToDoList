@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import {
 	useRequestGetToDos,
 	useRequestAddToDo,
@@ -7,7 +7,7 @@ import {
 	useRequestUpdateCheckedToDo,
 	useRequestDeleteToDo,
 } from './hooks';
-import { ToDoList, ToDoPage } from './components';
+import { ToDoList, ToDoPage, NotFound } from './components';
 
 export const App = () => {
 	const [refreshList, setRefreshList] = useState(false);
@@ -18,37 +18,50 @@ export const App = () => {
 
 	const { requestAddToDo } = useRequestAddToDo(refreshList, setRefreshList);
 
-	const { requestUpdateTextToDo } = useRequestUpdateTextToDo(refreshList, setRefreshList);
+	const { requestUpdateTextToDo } = useRequestUpdateTextToDo(
+		refreshList,
+		setRefreshList,
+	);
 
-	const { requestUpdateCheckedToDo } = useRequestUpdateCheckedToDo(refreshList, setRefreshList);
+	const { requestUpdateCheckedToDo } = useRequestUpdateCheckedToDo(
+		refreshList,
+		setRefreshList,
+	);
 
 	const { requestDeleteToDo } = useRequestDeleteToDo(refreshList, setRefreshList);
 
 	return (
 		<div>
 			<Routes>
-				<Route path='/' element={
-					<ToDoList
-						toDoList={toDoList}
-						setToDoList={setToDoList}
-						activeAddInput={activeAddInput}
-						setActiveAddInput={setActiveAddInput}
-						sorted={sorted}
-						setSorted={setSorted}
-						requestGetToDos={requestGetToDos}
-						requestAddToDo={requestAddToDo}
-					/>
-				} />
-				<Route path='todos/:id' element={
-					<ToDoPage
-						toDoList={toDoList}
-						setToDoList={setToDoList}
-						requestUpdateTextToDo={requestUpdateTextToDo}
-						requestUpdateCheckedToDo={requestUpdateCheckedToDo}
-						requestDeleteToDo={requestDeleteToDo}
-					/>} />
+				<Route
+					path="/"
+					element={
+						<ToDoList
+							toDoList={toDoList}
+							setToDoList={setToDoList}
+							activeAddInput={activeAddInput}
+							setActiveAddInput={setActiveAddInput}
+							sorted={sorted}
+							setSorted={setSorted}
+							requestGetToDos={requestGetToDos}
+							requestAddToDo={requestAddToDo}
+						/>
+					}
+				/>
+				<Route
+					path="/todos/:id"
+					element={
+						<ToDoPage
+							toDoList={toDoList}
+							requestUpdateTextToDo={requestUpdateTextToDo}
+							requestUpdateCheckedToDo={requestUpdateCheckedToDo}
+							requestDeleteToDo={requestDeleteToDo}
+						/>
+					}
+				/>
+				<Route path="/404" element={<NotFound />} />
+				<Route path="*" element={<Navigate to="/404" />} />
 			</Routes>
 		</div>
-	)
-		;
+	);
 };

@@ -7,3 +7,9 @@
 .todoItem:not(:last-child) {
 	border-bottom: 1px solid #ccc;
 }
+
+.toDoLink {
+	text-decoration: none;
+	color: inherit;
+	display: flex;
+}

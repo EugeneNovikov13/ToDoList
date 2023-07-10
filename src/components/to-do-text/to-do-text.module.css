@@ -13,12 +13,4 @@
 .todoText:hover {
 	color: #3AB37C;
 	cursor: pointer;
-	overflow: inherit;
-	white-space: inherit;
-	text-overflow: inherit;
-}
-
-.toDoLink {
-	text-decoration: none;
-	color: inherit;
 }

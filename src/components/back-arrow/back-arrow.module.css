@@ -1,0 +1,13 @@
+.backArrow {
+	width: 25px;
+	height: 25px;
+	background-image: url("./assets/back_icon.svg");
+	background-origin: content-box;
+	background-repeat: no-repeat;
+	border: 1px solid #3AB37C;
+	border-radius: 5px;
+	padding: 1px;
+	margin-bottom: 20px;
+	position: relative;
+	left: 370px
+}

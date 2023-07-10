@@ -7,8 +7,9 @@ export const useRequestGetToDos = refreshList => {
 			.then(loadedData => loadedData.json())
 			.then(loadedToDos => {
 				setToDoList(loadedToDos);
+				console.log(loadedToDos);
 			});
-	}
+	};
 
 	useEffect(requestGetToDos, [refreshList]);
 

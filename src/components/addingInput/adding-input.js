@@ -1,7 +1,12 @@
 import styles from './adding-input.module.css';
 import { useState } from 'react';
 
-export const AddingInput = ({ activeAddInput, setActiveAddInput, requestAddToDo }) => {
+export const AddingInput = ({
+	activeAddInput,
+	setActiveAddInput,
+	requestAddToDo,
+	setSorted,
+}) => {
 	const [value, setValue] = useState('');
 	const [isEmptyValue, setIsEmptyValue] = useState(true);
 
@@ -10,7 +15,7 @@ export const AddingInput = ({ activeAddInput, setActiveAddInput, requestAddToDo 
 		setValue(target.value);
 	};
 
-	const onEnterKeyUp = (e) => {
+	const onEnterKeyUp = e => {
 		if (e.key === 'Enter') {
 			onAddButtonClick();
 		}
@@ -21,7 +26,7 @@ export const AddingInput = ({ activeAddInput, setActiveAddInput, requestAddToDo 
 		requestAddToDo(value);
 		setValue('');
 		setIsEmptyValue(true);
-
+		setSorted(false);
 	};
 
 	return (
@@ -34,13 +39,15 @@ export const AddingInput = ({ activeAddInput, setActiveAddInput, requestAddToDo 
 				+
 			</button>
 			<input
-				className={activeAddInput ? `${styles.activeAddInput}` : `${styles.addInput}`}
-				type='text'
-				placeholder='Добавить...'
+				className={
+					activeAddInput ? `${styles.activeAddInput}` : `${styles.addInput}`
+				}
+				type="text"
+				placeholder="Добавить..."
 				value={value}
 				onFocus={() => setActiveAddInput(true)}
 				onChange={onChange}
-				onKeyUp={(e) => onEnterKeyUp(e)}
+				onKeyUp={e => onEnterKeyUp(e)}
 			></input>
 		</>
 	);
