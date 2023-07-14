@@ -1,21 +1,17 @@
-export const useRequestUpdateTextToDo = (refreshList, setRefreshList) => {
-
-	const requestUpdateTextToDo = (id, val) => {
-
+export const useRequestUpdateToDo = (refreshList, setRefreshList) => {
+	const requestUpdateToDo = (id, obj) => {
 		const url = 'http://localhost:3004/todos/' + id;
 
 		fetch(url, {
-			method: 'PATCH',
+			method: 'PUT',
 			headers: { 'Content-Type': 'application/json;charset=utf-8' },
-			body: JSON.stringify({
-				text: val,
-			}),
+			body: JSON.stringify(obj),
 		})
 			.then(rawResponse => rawResponse.json())
 			.then(response => {
 				setRefreshList(!refreshList);
-			})
+			});
 	};
 
-	return { requestUpdateTextToDo };
+	return { requestUpdateToDo };
 };
