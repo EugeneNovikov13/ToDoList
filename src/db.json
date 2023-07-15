@@ -4,7 +4,7 @@
       "id": "ded3ba70-2206-11ee-84cd-5d146cc80e9f",
       "orderIndex": 1,
       "text": "Добавить скрипт \"serve\"",
-      "completed": true
+      "completed": false
     },
     {
       "id": "ea601e60-2206-11ee-84cd-5d146cc80e9f",
@@ -14,7 +14,7 @@
     },
     {
       "id": "ef260ae0-2206-11ee-84cd-5d146cc80e9f",
-      "orderIndex": 5,
+      "orderIndex": 6,
       "text": "Не использовать useReducer и flux-подход в целом",
       "completed": false
     },
@@ -22,18 +22,18 @@
       "id": "70fab140-2236-11ee-a95c-cfde056b10c1",
       "orderIndex": 3,
       "text": "Исправить сбрасывание сортировки при изменении todolist",
-      "completed": true
+      "completed": false
     },
     {
       "id": "25c1bba0-22e6-11ee-a7a2-3947fea23e40",
       "orderIndex": 2,
       "text": "Добавить drag&drop",
-      "completed": true
+      "completed": false
     },
     {
-      "id": "f83c28c0-2234-11ee-8501-4f89dec8d96d",
-      "orderIndex": 6,
-      "text": "Убрать лишний код.",
+      "id": "30512120-2316-11ee-9031-a9b421ee9b3a",
+      "orderIndex": 5,
+      "text": "Разделить компоненты по папкам",
       "completed": false
     }
   ]

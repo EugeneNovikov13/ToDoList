@@ -1,13 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './edited-item.module.css';
 
-export const EditedItem = ({
-	id,
-	text,
-	setIsEdited,
-	requestUpdateToDo,
-	requestDeleteToDo,
-}) => {
+export const EditedItem = ({ id, text, setIsEdited, requestUpdateToDo }) => {
+	const { requestDeleteToDo } = useContext(AppContext);
+
 	const [value, setValue] = useState(text || '');
 
 	const onEditedItemChange = ({ target }) => {

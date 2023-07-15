@@ -1,4 +1,4 @@
-import { Checkbox, EditedItem, ToDoText, Delete } from '../index';
+import { Checkbox, EditedItem, ToDoText, Delete } from './components';
 import { useState } from 'react';
 import styles from './to-do-item.module.css';
 
@@ -9,7 +9,6 @@ export const ToDoItem = props => {
 		setDragItem,
 		isDraggable,
 		setIsDraggable,
-		requestDeleteToDo,
 		requestUpdateToDo,
 	} = props;
 
@@ -62,12 +61,11 @@ export const ToDoItem = props => {
 					text={text}
 					setIsEdited={setIsEdited}
 					requestUpdateToDo={requestUpdateToDo}
-					requestDeleteToDo={requestDeleteToDo}
 				/>
 			) : (
 				<ToDoText text={text} setIsEdited={setIsEdited} />
 			)}
-			<Delete id={id} requestDeleteToDo={requestDeleteToDo} />
+			<Delete id={id} />
 		</div>
 	);
 };

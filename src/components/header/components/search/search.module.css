@@ -1,6 +1,6 @@
 .searchInput {
-    box-sizing: border-box;
-    width: 100px;
+	box-sizing: border-box;
+	width: 100px;
 	height: 40px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
@@ -9,7 +9,7 @@
 
 .activeSearchInput {
 	box-sizing: border-box;
-    width: 200px;
+	width: 200px;
 	height: 40px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
