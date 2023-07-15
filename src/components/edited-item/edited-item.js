@@ -15,8 +15,13 @@ export const EditedItem = ({
 	};
 
 	const onEditedItemBlur = () => {
-		requestUpdateToDo(id, { text: value });
-		value.length > 0 ? setIsEdited(false) : requestDeleteToDo(id);
+		if (value.length > 0) {
+			const upperCaseVal = value[0].toUpperCase() + value.slice(1);
+			requestUpdateToDo(id, { text: upperCaseVal });
+			setIsEdited(false);
+		} else {
+			requestDeleteToDo(id);
+		}
 	};
 
 	return (

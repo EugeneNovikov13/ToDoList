@@ -1,9 +1,10 @@
 export const useRequestUpdateToDo = (refreshList, setRefreshList) => {
 	const requestUpdateToDo = (id, obj) => {
 		const url = 'http://localhost:3004/todos/' + id;
+		console.log(url, obj);
 
 		fetch(url, {
-			method: 'PUT',
+			method: 'PATCH',
 			headers: { 'Content-Type': 'application/json;charset=utf-8' },
 			body: JSON.stringify(obj),
 		})

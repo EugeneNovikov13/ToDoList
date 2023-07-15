@@ -8,9 +8,9 @@ export const useRequestGetToDos = refreshList => {
 			.then(loadedToDos => {
 				setToDoList(loadedToDos);
 			});
-	}
+	};
 
 	useEffect(requestGetToDos, [refreshList]);
 
-	return { toDoList, setToDoList, requestGetToDos };
+	return { toDoList, setToDoList };
 };

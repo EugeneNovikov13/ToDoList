@@ -7,7 +7,8 @@ export const ToDoItem = props => {
 		item,
 		dragItem,
 		setDragItem,
-		toDoList,
+		isDraggable,
+		setIsDraggable,
 		requestDeleteToDo,
 		requestUpdateToDo,
 	} = props;
@@ -24,28 +25,28 @@ export const ToDoItem = props => {
 		e.preventDefault();
 	};
 
-	const onDrop = (e, item) => {
+	const onDrop = (e, dropItem) => {
 		e.preventDefault();
-		let dropItem = item;
 
-		const dragIndex = toDoList.findIndex(todo => todo === dragItem);
-		const dropIndex = toDoList.findIndex(todo => todo === dropItem);
+		if (dropItem === dragItem) return;
 
-		const draggedArray = [...toDoList];
-		[draggedArray[dragIndex], draggedArray[dropIndex]] = [
-			draggedArray[dropIndex],
-			draggedArray[dragIndex],
-		];
-		console.log(draggedArray);
-		requestUpdateToDo('', draggedArray);
+		const newDragToDoObj = {
+			orderIndex: dropItem.orderIndex,
+		};
 
-		setDragItem(null);
+		const newDropToDoObj = {
+			orderIndex: dragItem.orderIndex,
+		};
+		setIsDraggable(false);
+		requestUpdateToDo(dragItem.id, newDragToDoObj);
+		requestUpdateToDo(dropItem.id, newDropToDoObj);
+		setIsDraggable(true);
 	};
 
 	return (
 		<div
 			className={styles.todoItem}
-			draggable={true}
+			draggable={isDraggable}
 			onDragStart={e => onDragStart(e, item)}
 			onDragOver={onDragOver}
 			onDrop={e => onDrop(e, item)}

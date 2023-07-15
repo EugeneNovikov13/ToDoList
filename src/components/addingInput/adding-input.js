@@ -1,7 +1,12 @@
 import styles from './adding-input.module.css';
 import { useState } from 'react';
 
-export const AddingInput = ({ activeAddInput, setActiveAddInput, requestAddToDo }) => {
+export const AddingInput = ({
+	toDoListLength,
+	activeAddInput,
+	setActiveAddInput,
+	requestAddToDo,
+}) => {
 	const [value, setValue] = useState('');
 	const [isEmptyValue, setIsEmptyValue] = useState(true);
 
@@ -10,14 +15,15 @@ export const AddingInput = ({ activeAddInput, setActiveAddInput, requestAddToDo 
 		setValue(target.value);
 	};
 
-	const onEnterKeyUp = (e) => {
+	const onEnterKeyUp = e => {
 		if (e.key === 'Enter') {
 			onAddButtonClick();
 		}
-	}
+	};
 
 	const onAddButtonClick = () => {
-		requestAddToDo(value);
+		if (isEmptyValue) return;
+		requestAddToDo(value, toDoListLength + 1);
 		setValue('');
 		setIsEmptyValue(true);
 	};
@@ -32,13 +38,15 @@ export const AddingInput = ({ activeAddInput, setActiveAddInput, requestAddToDo 
 				+
 			</button>
 			<input
-				className={activeAddInput ? `${styles.activeAddInput}` : `${styles.addInput}`}
+				className={
+					activeAddInput ? `${styles.activeAddInput}` : `${styles.addInput}`
+				}
 				type="text"
 				placeholder="Добавить..."
 				value={value}
 				onFocus={() => setActiveAddInput(true)}
 				onChange={onChange}
-				onKeyUp={(e) => onEnterKeyUp(e)}
+				onKeyUp={e => onEnterKeyUp(e)}
 			></input>
 		</>
 	);

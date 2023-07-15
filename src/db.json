@@ -2,27 +2,38 @@
   "todos": [
     {
       "id": "ded3ba70-2206-11ee-84cd-5d146cc80e9f",
-      "text": "добавить скрипт \"serve\"",
-      "completed": false
+      "orderIndex": 1,
+      "text": "Добавить скрипт \"serve\"",
+      "completed": true
     },
     {
       "id": "ea601e60-2206-11ee-84cd-5d146cc80e9f",
-      "text": "использовать React Context там, где он уместен",
+      "orderIndex": 4,
+      "text": "Использовать React Context там, где он уместен",
       "completed": false
     },
     {
       "id": "ef260ae0-2206-11ee-84cd-5d146cc80e9f",
-      "text": "не использовать useReducer и flux-подход в целом",
+      "orderIndex": 5,
+      "text": "Не использовать useReducer и flux-подход в целом",
+      "completed": false
+    },
+    {
+      "id": "70fab140-2236-11ee-a95c-cfde056b10c1",
+      "orderIndex": 3,
+      "text": "Исправить сбрасывание сортировки при изменении todolist",
+      "completed": true
+    },
+    {
+      "id": "25c1bba0-22e6-11ee-a7a2-3947fea23e40",
+      "orderIndex": 2,
+      "text": "Добавить drag&drop",
       "completed": true
     },
     {
       "id": "f83c28c0-2234-11ee-8501-4f89dec8d96d",
+      "orderIndex": 6,
       "text": "Убрать лишний код.",
-      "completed": true
-    },
-    {
-      "id": "70fab140-2236-11ee-a95c-cfde056b10c1",
-      "text": "Исправить сбрасывание сортировки при изменении todolist",
       "completed": false
     }
   ]
