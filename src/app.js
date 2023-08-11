@@ -46,22 +46,28 @@ export const App = () => {
 				<Header sorted={sorted} />
 
 				{sorted
-					? toDoList
+					? Object.entries(toDoList)
 							.sort((...args) => sortToDosByOrderIndex('text', ...args))
-							.map(todo => (
+							.map(([id, todo]) => (
 								<ToDoItem
-									key={todo.id}
+									key={id}
+									id={id}
 									item={todo}
 									{...toDoItemProps}
 									isDraggable={false}
 								/>
 							))
-					: toDoList
+					: Object.entries(toDoList)
 							.sort((...args) =>
 								sortToDosByOrderIndex('orderIndex', ...args),
 							)
-							.map(todo => (
-								<ToDoItem key={todo.id} item={todo} {...toDoItemProps} />
+							.map(([id, todo]) => (
+								<ToDoItem
+									key={id}
+									id={id}
+									item={todo}
+									{...toDoItemProps}
+								/>
 							))}
 			</div>
 		</AppContext.Provider>

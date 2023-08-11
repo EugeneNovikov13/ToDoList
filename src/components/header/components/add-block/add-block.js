@@ -8,11 +8,15 @@ export const AddBlock = () => {
 	const [value, setValue] = useState('');
 	const [isEmptyValue, setIsEmptyValue] = useState(true);
 
-	const maxOrderIndex = Math.max(...toDoList.map(todo => todo.orderIndex));
+	const maxOrderIndex = Math.max(
+		...Object.entries(toDoList).map(todo => todo[1].orderIndex),
+	);
 
 	const onAddButtonClick = () => {
 		if (isEmptyValue) return;
-		requestAddToDo(value, maxOrderIndex + 1);
+		maxOrderIndex
+			? requestAddToDo(value, maxOrderIndex + 1)
+			: requestAddToDo(value, 0);
 		setValue('');
 		setIsEmptyValue(true);
 	};

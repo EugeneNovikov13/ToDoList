@@ -9,6 +9,7 @@ export const useRequestUpdateToDo = (refreshList, setRefreshList) => {
 		})
 			.then(rawResponse => rawResponse.json())
 			.then(response => {
+				console.log('requestUpdateToDo', response);
 				setRefreshList(!refreshList);
 			});
 	};

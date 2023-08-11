@@ -1,40 +1,34 @@
 {
-  "todos": [
-    {
-      "id": "ded3ba70-2206-11ee-84cd-5d146cc80e9f",
-      "orderIndex": 1,
-      "text": "Добавить скрипт \"serve\"",
-      "completed": false
-    },
-    {
-      "id": "ea601e60-2206-11ee-84cd-5d146cc80e9f",
-      "orderIndex": 4,
-      "text": "Использовать React Context там, где он уместен",
-      "completed": false
-    },
-    {
-      "id": "ef260ae0-2206-11ee-84cd-5d146cc80e9f",
-      "orderIndex": 6,
-      "text": "Не использовать useReducer и flux-подход в целом",
-      "completed": false
-    },
-    {
-      "id": "70fab140-2236-11ee-a95c-cfde056b10c1",
-      "orderIndex": 3,
-      "text": "Исправить сбрасывание сортировки при изменении todolist",
-      "completed": false
-    },
-    {
-      "id": "25c1bba0-22e6-11ee-a7a2-3947fea23e40",
-      "orderIndex": 2,
-      "text": "Добавить drag&drop",
-      "completed": false
-    },
-    {
-      "id": "30512120-2316-11ee-9031-a9b421ee9b3a",
-      "orderIndex": 5,
-      "text": "Разделить компоненты по папкам",
-      "completed": false
-    }
-  ]
+	"todos": {
+		"9f33d040-376d-11ee-a723-bd8448a8f366": {
+			"orderIndex": 0,
+			"text": "Переработать приложение «Список Дел»",
+			"completed": false
+		},
+		"a786b410-376d-11ee-a723-bd8448a8f366": {
+			"orderIndex": 1,
+			"text": "Не использовать React Context и хук useReducer()",
+			"completed": false
+		},
+		"ac71b4c0-376d-11ee-a723-bd8448a8f366": {
+			"orderIndex": 2,
+			"text": "Использовать ”redux”, “react-redux” и “redux-thunk”",
+			"completed": false
+		},
+		"b54dc5c0-376d-11ee-a723-bd8448a8f366": {
+			"orderIndex": 3,
+			"text": "Определить части состояния и разделить на под-состояния, соответственно разделить и редьюсер на несколько редьюсеров",
+			"completed": false
+		},
+		"bbb183c0-376d-11ee-a723-bd8448a8f366": {
+			"orderIndex": 5,
+			"text": "Проверить работу приложения в Redux DevTools",
+			"completed": false
+		},
+		"45c7b3f0-380d-11ee-9357-7dce1de40f65": {
+			"orderIndex": 4,
+			"text": "Привет медвед",
+			"completed": false
+		}
+	}
 }

@@ -6,6 +6,7 @@ export const useRequestGetToDos = refreshList => {
 		fetch(url)
 			.then(loadedData => loadedData.json())
 			.then(loadedToDos => {
+				console.log('requestGetToDos', loadedToDos);
 				setToDoList(loadedToDos);
 			});
 	};

@@ -4,7 +4,10 @@ export const useRequestDeleteToDo = (refreshList, setRefreshList) => {
 
 		fetch(url, {
 			method: 'DELETE',
-		}).then(() => setRefreshList(!refreshList));
+		}).then(response => {
+			console.log('requestDeleteToDo', response);
+			setRefreshList(!refreshList);
+		});
 	};
 
 	return { requestDeleteToDo };

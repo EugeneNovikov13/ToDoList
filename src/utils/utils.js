@@ -19,10 +19,10 @@ export const search = (val, showSearchResult) => {
 };
 
 export const sortToDosByOrderIndex = (param, a, b) => {
-	if (a[param] > b[param]) {
+	if (a[1][param] > b[1][param]) {
 		return 1;
 	}
-	if (a[param] < b[param]) {
+	if (a[1][param] < b[1][param]) {
 		return -1;
 	}
 };
