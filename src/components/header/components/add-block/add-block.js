@@ -9,7 +9,7 @@ export const AddBlock = () => {
 	const [isEmptyValue, setIsEmptyValue] = useState(true);
 
 	const maxOrderIndex = Math.max(
-		...Object.entries(toDoList).map(todo => todo[1].orderIndex),
+		...Object.values(toDoList).map(todo => todo.orderIndex),
 	);
 
 	const onAddButtonClick = () => {

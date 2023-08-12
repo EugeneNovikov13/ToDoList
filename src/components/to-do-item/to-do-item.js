@@ -17,18 +17,19 @@ export const ToDoItem = props => {
 
 	const [isEdited, setIsEdited] = useState(false);
 
-	const onDragStart = (e, todo) => {
-		setDragItem(todo);
+	const onDragStart = (e, id, item) => {
+		const dragItemIdObj = { id: `${id}` };
+		setDragItem({ ...dragItemIdObj, ...item });
 	};
 
 	const onDragOver = e => {
 		e.preventDefault();
 	};
 
-	const onDrop = (e, dropItem) => {
+	const onDrop = (e, dropItemId, dropItem) => {
 		e.preventDefault();
 
-		if (dropItem === dragItem) return;
+		if (dropItemId === dragItem.id) return;
 
 		const newDragToDoObj = {
 			orderIndex: dropItem.orderIndex,
@@ -39,7 +40,7 @@ export const ToDoItem = props => {
 		};
 		setIsDraggable(false);
 		requestUpdateToDo(dragItem.id, newDragToDoObj);
-		requestUpdateToDo(dropItem.id, newDropToDoObj);
+		requestUpdateToDo(dropItemId, newDropToDoObj);
 		setIsDraggable(true);
 	};
 
@@ -47,9 +48,9 @@ export const ToDoItem = props => {
 		<div
 			className={styles.todoItem}
 			draggable={isDraggable}
-			onDragStart={e => onDragStart(e, item)}
+			onDragStart={e => onDragStart(e, id, item)}
 			onDragOver={onDragOver}
-			onDrop={e => onDrop(e, item)}
+			onDrop={e => onDrop(e, id, item)}
 		>
 			<Checkbox
 				id={id}

@@ -1,12 +1,6 @@
 export const initialState = {
-	refreshList: false, //App
-	isDraggable: true, //App
 	sorted: false, //App
-	dragItem: null, //App
 	toDoList: {}, //App
-	requestAddToDo: null, //App
-	requestUpdateToDo: null, //App
-	requestDeleteToDo: null, //App
 	activeAddInput: true, //Header
 };
 

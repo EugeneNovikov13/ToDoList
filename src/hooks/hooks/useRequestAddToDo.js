@@ -1,27 +1,18 @@
-import { v1 as uuidv1 } from 'uuid';
+import { ref, push } from 'firebase/database';
+import { db } from '../../firebase';
 
-export const useRequestAddToDo = (refreshList, setRefreshList) => {
+export const useRequestAddToDo = () => {
 	const requestAddToDo = (val, orderIndex) => {
-		const id = uuidv1();
 		const upperCaseVal = val[0].toUpperCase() + val.slice(1);
 		const data = {
-			[id]: {
-				orderIndex: `${orderIndex}`,
-				text: `${upperCaseVal}`,
-				completed: false,
-			},
+			orderIndex: `${orderIndex}`,
+			text: `${upperCaseVal}`,
+			completed: false,
 		};
+		const toDoDbRef = ref(db, 'todos');
 
-		fetch('http://localhost:3004/todos', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json;charset=utf-8' },
-			body: JSON.stringify(data),
-		})
-			.then(rawResponse => rawResponse.json())
-			.then(response => {
-				console.log('requestAddToDo', response);
-				setRefreshList(!refreshList);
-			});
+		push(toDoDbRef, data)
+			.then(() => console.log('Запись добавлена'), () => console.log('Не удалось добавить запись'));
 	};
 
 	return { requestAddToDo };

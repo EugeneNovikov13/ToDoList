@@ -24,11 +24,6 @@
 			"orderIndex": 5,
 			"text": "Проверить работу приложения в Redux DevTools",
 			"completed": false
-		},
-		"45c7b3f0-380d-11ee-9357-7dce1de40f65": {
-			"orderIndex": 4,
-			"text": "Привет медвед",
-			"completed": false
 		}
 	}
 }

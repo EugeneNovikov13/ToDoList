@@ -1,17 +1,14 @@
-export const useRequestUpdateToDo = (refreshList, setRefreshList) => {
-	const requestUpdateToDo = (id, obj) => {
-		const url = 'http://localhost:3004/todos/' + id;
+import { ref, update } from 'firebase/database';
+import { db } from '../../firebase';
 
-		fetch(url, {
-			method: 'PATCH',
-			headers: { 'Content-Type': 'application/json;charset=utf-8' },
-			body: JSON.stringify(obj),
-		})
-			.then(rawResponse => rawResponse.json())
-			.then(response => {
-				console.log('requestUpdateToDo', response);
-				setRefreshList(!refreshList);
-			});
+export const useRequestUpdateToDo = () => {
+	const requestUpdateToDo = (id, obj) => {
+		const path = 'todos/' + id;
+
+		const toDoTextRef = ref(db, path);
+
+		update(toDoTextRef, obj)
+			.then(() => console.log('Обновлена запись'), () => console.log('Запись не удалось обновить'));
 	};
 
 	return { requestUpdateToDo };
