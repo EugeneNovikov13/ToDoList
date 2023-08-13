@@ -1,27 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AppContext } from './context';
 import {
-	useRequestGetToDos,
-	useRequestAddToDo,
 	useRequestUpdateToDo,
-	useRequestDeleteToDo,
 } from './hooks';
 import { ToDoItem, Header } from './components';
 import { sortToDosByOrderIndex } from './utils/utils';
 import styles from './app.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectorSorted, selectorToDoList } from './redux/selectors';
+import { loadDatabaseAsync } from './redux/actions/to-do-list';
 
 export const App = () => {
-	const [sorted, setSorted] = useState(false);
+	const sorted = useSelector(selectorSorted);
 	const [dragItem, setDragItem] = useState(null);
 	const [isDraggable, setIsDraggable] = useState(true);
+	const dispatch = useDispatch();
 
-	const { toDoList, setToDoList } = useRequestGetToDos();
+	useEffect(() => {
+		dispatch(loadDatabaseAsync);
+	}, []);
 
-	const { requestAddToDo } = useRequestAddToDo();
+	const toDoList = useSelector(selectorToDoList);
 
 	const { requestUpdateToDo } = useRequestUpdateToDo();
-
-	const { requestDeleteToDo } = useRequestDeleteToDo();
 
 	const toDoItemProps = {
 		dragItem: dragItem,
@@ -35,14 +36,11 @@ export const App = () => {
 		<AppContext.Provider
 			value={{
 				toDoList: toDoList,
-				setToDoList: setToDoList,
-				setSorted: setSorted,
-				requestAddToDo: requestAddToDo,
-				requestDeleteToDo: requestDeleteToDo,
+				// requestDeleteToDo: requestDeleteToDo,
 			}}
 		>
 			<div className={styles.todoList}>
-				<Header sorted={sorted} />
+				<Header />
 
 				{sorted
 					? Object.entries(toDoList)

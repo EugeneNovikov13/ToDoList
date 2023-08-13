@@ -1,20 +1,12 @@
-import { useContext } from 'react';
-import { HeaderContext } from '../../../../../../context';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectorActiveAddInput } from '../../../../../../redux/selectors';
 import styles from './add-input.module.css';
+import { setActiveAddInput } from '../../../../../../redux/actions/header';
 
-export const AddInput = ({ value, setValue, setIsEmptyValue, onAddButtonClick }) => {
-	const { activeAddInput, setActiveAddInput } = useContext(HeaderContext);
+export const AddInput = ({ value, ...rest }) => {
+	const dispatch = useDispatch();
 
-	const onChange = ({ target }) => {
-		target.value.length > 0 ? setIsEmptyValue(false) : setIsEmptyValue(true);
-		setValue(target.value);
-	};
-
-	const onEnterKeyUp = e => {
-		if (e.key === 'Enter') {
-			onAddButtonClick();
-		}
-	};
+	const activeAddInput = useSelector(selectorActiveAddInput);
 
 	return (
 		<input
@@ -22,9 +14,8 @@ export const AddInput = ({ value, setValue, setIsEmptyValue, onAddButtonClick })
 			type="text"
 			placeholder="Добавить..."
 			value={value}
-			onFocus={() => setActiveAddInput(true)}
-			onChange={onChange}
-			onKeyUp={e => onEnterKeyUp(e)}
+			onFocus={() => dispatch(setActiveAddInput(true))}
+			{...rest}
 		></input>
 	);
 };

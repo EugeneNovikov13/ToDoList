@@ -4,7 +4,7 @@ import { db } from '../firebase';
 export const debounce = (func, delay) => {
 	let timeoutId;
 
-	return function (...args) {
+	return function(...args) {
 		clearTimeout(timeoutId);
 		timeoutId = setTimeout(() => func.apply(this, args), delay);
 	};
@@ -28,3 +28,7 @@ export const sortToDosByOrderIndex = (param, a, b) => {
 		return -1;
 	}
 };
+
+export const maxOrderIndex = (list) => {
+	return Object.values(list).length > 0 ? Math.max(...Object.values(list).map(todo => todo.orderIndex)) + 1 : 0;
+}

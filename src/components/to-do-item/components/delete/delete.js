@@ -1,13 +1,13 @@
-import { useContext } from 'react';
-import { AppContext } from '../../../../context';
 import styles from './delete.module.css';
+import { useDispatch } from 'react-redux';
+import { deleteTodo } from '../../../../redux/actions/to-do-list/delete-todo';
 
 export const Delete = ({ id }) => {
-	const { requestDeleteToDo } = useContext(AppContext);
+	const dispatch = useDispatch();
+	//
+	// const onDeleteClick = () => {
+	// 	requestDeleteToDo(id);
+	// };
 
-	const onDeleteClick = () => {
-		requestDeleteToDo(id);
-	};
-
-	return <div className={styles.delete} onClick={onDeleteClick}></div>;
+	return <div className={styles.delete} onClick={() => dispatch(deleteTodo(id))}></div>;
 };
