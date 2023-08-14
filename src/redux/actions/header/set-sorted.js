@@ -1,1 +1,1 @@
-export const setSorted = (active) => ({ type: 'SET_SORTED', payload: active });
+export const setSorted = active => ({ type: 'SET_SORTED', payload: active });

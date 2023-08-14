@@ -1,6 +1,4 @@
-export const toDoListInitialState = {
-	toDoList: {}, //App
-};
+export const toDoListInitialState = {};
 
 export const toDoReducer = (state = toDoListInitialState, action) => {
 	const { type, payload } = action;
@@ -8,25 +6,35 @@ export const toDoReducer = (state = toDoListInitialState, action) => {
 	switch (type) {
 		case 'LOAD_DATABASE':
 			return {
-				...state,
-				toDoList: payload,
+				...payload,
 			};
 		case 'ADD_TODO':
 			return {
 				...state,
-				toDoList: {
-					...state.toDoList,
-					...payload,
+				...payload,
+			};
+		case 'UPDATE_TODO':
+			return {
+				...state,
+				[payload.id]: {
+					...state[payload.id],
+					...payload.item,
 				},
 			};
 		case 'REMOVE_TODO':
-			return {
-				...state,
-				toDoList: {
-					payload,
-					...state.toDoList,
+			const newToDoList = Object.keys(state).reduce((result, key) => {
+				if (key !== payload) {
+					result[key] = state[key];
 				}
-			}
+				return result;
+			}, {});
+			return {
+				...newToDoList,
+			};
+		case 'SEARCH_BY_TODOLIST':
+			return {
+				...payload,
+			};
 		default:
 			return state;
 	}

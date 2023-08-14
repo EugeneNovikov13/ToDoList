@@ -1,17 +1,13 @@
-import { Checkbox, EditedItem, ToDoText, Delete } from './components';
+import { Checkbox, Delete, EditedItem, ToDoText } from './components';
 import { useState } from 'react';
+import { updateTodo } from '../../redux/actions/to-do-list';
+import { useDispatch } from 'react-redux';
 import styles from './to-do-item.module.css';
 
 export const ToDoItem = props => {
-	const {
-		id,
-		item,
-		dragItem,
-		setDragItem,
-		isDraggable,
-		setIsDraggable,
-		requestUpdateToDo,
-	} = props;
+	const dispatch = useDispatch();
+
+	const { id, item, dragItem, setDragItem, isDraggable, setIsDraggable } = props;
 
 	const { text, completed } = item;
 
@@ -39,8 +35,8 @@ export const ToDoItem = props => {
 			orderIndex: dragItem.orderIndex,
 		};
 		setIsDraggable(false);
-		requestUpdateToDo(dragItem.id, newDragToDoObj);
-		requestUpdateToDo(dropItemId, newDropToDoObj);
+		dispatch(updateTodo(dragItem.id, newDragToDoObj));
+		dispatch(updateTodo(dropItemId, newDropToDoObj));
 		setIsDraggable(true);
 	};
 
@@ -52,18 +48,9 @@ export const ToDoItem = props => {
 			onDragOver={onDragOver}
 			onDrop={e => onDrop(e, id, item)}
 		>
-			<Checkbox
-				id={id}
-				completed={completed}
-				requestUpdateToDo={requestUpdateToDo}
-			/>
+			<Checkbox id={id} completed={completed} />
 			{isEdited ? (
-				<EditedItem
-					id={id}
-					text={text}
-					setIsEdited={setIsEdited}
-					requestUpdateToDo={requestUpdateToDo}
-				/>
+				<EditedItem id={id} text={text} setIsEdited={setIsEdited} />
 			) : (
 				<ToDoText text={text} setIsEdited={setIsEdited} />
 			)}

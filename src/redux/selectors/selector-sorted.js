@@ -1,1 +1,1 @@
-export const selectorSorted = (state) => state.headerState.sorted;
+export const selectorSorted = state => state.headerState.sorted;

@@ -1,9 +1,10 @@
-import { useState, useContext } from 'react';
-import { AppContext } from '../../../../context';
+import { useState } from 'react';
 import styles from './edited-item.module.css';
+import { useDispatch } from 'react-redux';
+import { deleteTodo, updateTodo } from '../../../../redux/actions/to-do-list';
 
-export const EditedItem = ({ id, text, setIsEdited, requestUpdateToDo }) => {
-	const { requestDeleteToDo } = useContext(AppContext);
+export const EditedItem = ({ id, text, setIsEdited }) => {
+	const dispatch = useDispatch();
 
 	const [value, setValue] = useState(text || '');
 
@@ -14,10 +15,10 @@ export const EditedItem = ({ id, text, setIsEdited, requestUpdateToDo }) => {
 	const onEditedItemBlur = () => {
 		if (value.length > 0) {
 			const upperCaseVal = value[0].toUpperCase() + value.slice(1);
-			requestUpdateToDo(id, { text: upperCaseVal });
+			dispatch(updateTodo(id, { text: upperCaseVal }));
 			setIsEdited(false);
 		} else {
-			requestDeleteToDo(id);
+			dispatch(deleteTodo(id));
 		}
 	};
 

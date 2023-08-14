@@ -1,7 +1,7 @@
-import styles from './sort-button.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectorSorted } from '../../../../redux/selectors';
 import { setSorted } from '../../../../redux/actions/header/set-sorted';
+import styles from './sort-button.module.css';
 
 export const SortButton = () => {
 	const dispatch = useDispatch();
@@ -11,7 +11,9 @@ export const SortButton = () => {
 	return (
 		<button
 			className={sorted ? `${styles.sortButtonSorted}` : `${styles.sortButton}`}
-			onClick={() => (sorted ? dispatch(setSorted(false)) : dispatch(setSorted(true)))}
+			onClick={() =>
+				sorted ? dispatch(setSorted(false)) : dispatch(setSorted(true))
+			}
 		></button>
 	);
 };

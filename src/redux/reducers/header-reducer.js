@@ -11,12 +11,12 @@ export const headerReducer = (state = headerInitialState, action) => {
 			return {
 				...state,
 				activeAddInput: payload,
-			}
+			};
 		case 'SET_SORTED':
 			return {
 				...state,
 				sorted: payload,
-			}
+			};
 		default:
 			return state;
 	}

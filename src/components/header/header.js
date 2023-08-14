@@ -5,7 +5,7 @@ export const Header = () => {
 	return (
 		<div className={styles.header}>
 			<AddBlock />
-			<Search	/>
+			<Search />
 			<SortButton />
 		</div>
 	);
