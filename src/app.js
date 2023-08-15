@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Header, ToDoItem } from './components';
 import { sortToDosByOrderIndex } from './utils/utils';
 import { selectorSorted, selectorToDoList } from './redux/selectors';
-import { loadDatabaseAsync } from './redux/actions/to-do-list';
+import { loadDatabaseAsync, updateTodo } from './redux/actions/to-do-list';
 import styles from './app.module.css';
 
 export const App = () => {
@@ -18,11 +18,31 @@ export const App = () => {
 
 	const toDoList = useSelector(selectorToDoList);
 
-	const toDoItemProps = {
-		dragItem: dragItem,
-		setDragItem: setDragItem,
-		isDraggable: isDraggable,
-		setIsDraggable: setIsDraggable,
+	const onDragStart = (id, item) => {
+		const dragItemIdObj = { id: `${id}` };
+		setDragItem({ ...dragItemIdObj, ...item });
+	};
+
+	const onDragOver = e => {
+		e.preventDefault();
+	};
+
+	const onDrop = (e, id, item) => {
+		e.preventDefault();
+
+		if (id === dragItem.id) return;
+
+		const newDragToDoObj = {
+			orderIndex: item.orderIndex,
+		};
+
+		const newDropToDoObj = {
+			orderIndex: dragItem.orderIndex,
+		};
+		setIsDraggable(false);
+		dispatch(updateTodo(dragItem.id, newDragToDoObj));
+		dispatch(updateTodo(id, newDropToDoObj));
+		setIsDraggable(true);
 	};
 
 	return (
@@ -37,14 +57,24 @@ export const App = () => {
 								key={id}
 								id={id}
 								item={todo}
-								{...toDoItemProps}
-								isDraggable={false}
+								draggable={false}
+								onDragStart={() => onDragStart(id, todo)}
+								onDragOver={onDragOver}
+								onDrop={e => onDrop(e, id, todo)}
 							/>
 						))
 				: Object.entries(toDoList)
 						.sort((...args) => sortToDosByOrderIndex('orderIndex', ...args))
 						.map(([id, todo]) => (
-							<ToDoItem key={id} id={id} item={todo} {...toDoItemProps} />
+							<ToDoItem
+								key={id}
+								id={id}
+								item={todo}
+								draggable={isDraggable}
+								onDragStart={() => onDragStart(id, todo)}
+								onDragOver={onDragOver}
+								onDrop={e => onDrop(e, id, todo)}
+							/>
 						))}
 		</div>
 	);

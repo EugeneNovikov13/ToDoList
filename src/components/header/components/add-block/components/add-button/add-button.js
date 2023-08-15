@@ -1,8 +1,8 @@
 import styles from './add-button.module.css';
 
-export const AddButton = ({ isEmptyValue, ...rest }) => {
+export const AddButton = ({ ...rest }) => {
 	return (
-		<button className={styles.addButton} disabled={isEmptyValue} {...rest}>
+		<button className={styles.addButton} {...rest}>
 			+
 		</button>
 	);
