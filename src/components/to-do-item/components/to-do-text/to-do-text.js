@@ -1,9 +1,9 @@
 import styles from './to-do-text.module.css';
 
-export const ToDoText = ({ text, setIsEdited }) => {
+export const ToDoText = ({ children, ...rest }) => {
 	return (
-		<div className={styles.todoText} onClick={() => setIsEdited(true)}>
-			{text}
+		<div className={styles.todoText} {...rest}>
+			{children}
 		</div>
 	);
 };

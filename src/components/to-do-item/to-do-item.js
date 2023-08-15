@@ -1,6 +1,6 @@
 import { Checkbox, Delete, EditedItem, ToDoText } from './components';
 import { useState } from 'react';
-import { updateTodo } from '../../redux/actions/to-do-list';
+import { deleteTodo, updateTodo } from '../../redux/actions/to-do-list';
 import { useDispatch } from 'react-redux';
 import styles from './to-do-item.module.css';
 
@@ -13,7 +13,11 @@ export const ToDoItem = props => {
 
 	const [isEdited, setIsEdited] = useState(false);
 
-	const onDragStart = (e, id, item) => {
+	const [checkedState, setCheckedState] = useState(completed);
+
+	const [editedItemText, setEditedItemText] = useState(text || '');
+
+	const onDragStart = () => {
 		const dragItemIdObj = { id: `${id}` };
 		setDragItem({ ...dragItemIdObj, ...item });
 	};
@@ -22,13 +26,13 @@ export const ToDoItem = props => {
 		e.preventDefault();
 	};
 
-	const onDrop = (e, dropItemId, dropItem) => {
+	const onDrop = e => {
 		e.preventDefault();
 
-		if (dropItemId === dragItem.id) return;
+		if (id === dragItem.id) return;
 
 		const newDragToDoObj = {
-			orderIndex: dropItem.orderIndex,
+			orderIndex: item.orderIndex,
 		};
 
 		const newDropToDoObj = {
@@ -36,25 +40,48 @@ export const ToDoItem = props => {
 		};
 		setIsDraggable(false);
 		dispatch(updateTodo(dragItem.id, newDragToDoObj));
-		dispatch(updateTodo(dropItemId, newDropToDoObj));
+		dispatch(updateTodo(id, newDropToDoObj));
 		setIsDraggable(true);
+	};
+
+	const onCheckboxClick = () => {
+		setCheckedState(!checkedState);
+		dispatch(updateTodo(id, { completed: !checkedState }));
+	};
+
+	const onEditedItemChange = ({ target }) => {
+		setEditedItemText(target.value);
+	};
+
+	const onEditedItemBlur = ({ target }) => {
+		if (target.value.length > 0) {
+			const upperCaseVal = target.value[0].toUpperCase() + target.value.slice(1);
+			dispatch(updateTodo(id, { text: upperCaseVal }));
+			setIsEdited(false);
+		} else {
+			dispatch(deleteTodo(id));
+		}
 	};
 
 	return (
 		<div
 			className={styles.todoItem}
 			draggable={isDraggable}
-			onDragStart={e => onDragStart(e, id, item)}
+			onDragStart={onDragStart}
 			onDragOver={onDragOver}
-			onDrop={e => onDrop(e, id, item)}
+			onDrop={e => onDrop(e)}
 		>
-			<Checkbox id={id} completed={completed} />
+			<Checkbox completed={completed} onClick={onCheckboxClick} />
 			{isEdited ? (
-				<EditedItem id={id} text={text} setIsEdited={setIsEdited} />
+				<EditedItem
+					value={editedItemText}
+					onChange={onEditedItemChange}
+					onBlur={onEditedItemBlur}
+				/>
 			) : (
-				<ToDoText text={text} setIsEdited={setIsEdited} />
+				<ToDoText onClick={() => setIsEdited(true)}>{text}</ToDoText>
 			)}
-			<Delete id={id} />
+			<Delete onClick={() => dispatch(deleteTodo(id))} />
 		</div>
 	);
 };
