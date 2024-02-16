@@ -5,6 +5,7 @@ import { sortToDosByOrderIndex } from './utils/utils';
 import { selectorSorted, selectorToDoList } from './redux/selectors';
 import { loadDatabaseAsync, updateTodo } from './redux/actions/to-do-list';
 import styles from './app.module.css';
+import { IToDo, IToDoList } from './types';
 
 export const App = () => {
 	const sorted = useSelector(selectorSorted);
@@ -16,7 +17,7 @@ export const App = () => {
 		dispatch(loadDatabaseAsync);
 	}, []);
 
-	const toDoList = useSelector(selectorToDoList);
+	const toDoList: IToDoList = useSelector(selectorToDoList);
 
 	const onDragStart = (id, item) => {
 		const dragItemIdObj = { id: `${id}` };
@@ -46,12 +47,14 @@ export const App = () => {
 	};
 
 	return (
-		<div className={styles.todoList}>
+		<div className={styles.toDoList}>
 			<Header />
 
 			{sorted
 				? Object.entries(toDoList)
-						.sort((...args) => sortToDosByOrderIndex('text', ...args))
+						.sort((toDoA: [string, IToDo], toDoB: [string, IToDo]) =>
+							sortToDosByOrderIndex('text', toDoA[1], toDoB[1]),
+						)
 						.map(([id, todo]) => (
 							<ToDoItem
 								key={id}
@@ -64,7 +67,9 @@ export const App = () => {
 							/>
 						))
 				: Object.entries(toDoList)
-						.sort((...args) => sortToDosByOrderIndex('orderIndex', ...args))
+						.sort((toDoA: [string, IToDo], toDoB: [string, IToDo]) =>
+							sortToDosByOrderIndex('orderIndex', toDoA[1], toDoB[1]),
+						)
 						.map(([id, todo]) => (
 							<ToDoItem
 								key={id}

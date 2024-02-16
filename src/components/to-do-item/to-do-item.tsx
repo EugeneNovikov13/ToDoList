@@ -7,7 +7,7 @@ import styles from './to-do-item.module.css';
 export const ToDoItem = props => {
 	const dispatch = useDispatch();
 
-	const { id, item, ...rest } = props;
+	const { id: string, item: IToDo, ...rest } = props;
 	const { text, completed } = item;
 
 	const [isEdited, setIsEdited] = useState(false);

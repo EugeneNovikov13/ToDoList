@@ -1,4 +1,6 @@
-export const toDoListInitialState = {};
+import { IToDoList } from '../../types';
+
+export const toDoListInitialState: IToDoList = {};
 
 export const toDoReducer = (state = toDoListInitialState, action) => {
 	const { type, payload } = action;
