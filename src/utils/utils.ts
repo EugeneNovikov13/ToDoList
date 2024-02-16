@@ -9,6 +9,7 @@ export const sortToDosByOrderIndex = (param: string, a: IToDo, b: IToDo): number
 	if (value1 < value2) {
 		return -1;
 	}
+	return 0;
 };
 
 export const maxOrderIndex = (list: IToDoList) => {

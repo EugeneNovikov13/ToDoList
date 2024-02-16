@@ -4,6 +4,10 @@ export interface IToDo {
 	text: string;
 }
 
+export interface IToDoWithId extends IToDo {
+	id: string;
+}
+
 export interface IToDoList {
 	[id: string]: IToDo;
 }

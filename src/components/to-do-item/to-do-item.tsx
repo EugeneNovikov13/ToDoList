@@ -1,14 +1,27 @@
 import { Checkbox, Delete, EditedItem, ToDoText } from './components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { deleteTodo, updateTodo } from '../../redux/actions/to-do-list';
 import { useDispatch } from 'react-redux';
 import styles from './to-do-item.module.css';
+import { IToDo } from '../../types';
 
-export const ToDoItem = props => {
+interface IToDoItemProps {
+	id: string;
+	item: IToDo;
+	draggable: boolean;
+	onDragStart: React.DragEventHandler<HTMLDivElement>;
+	onDragOver: React.DragEventHandler<HTMLDivElement>;
+	onDrop: React.DragEventHandler<HTMLDivElement>;
+}
+
+export const ToDoItem: React.FC<IToDoItemProps> = props => {
 	const dispatch = useDispatch();
 
-	const { id: string, item: IToDo, ...rest } = props;
-	const { text, completed } = item;
+	const {
+		id,
+		item: { text, completed },
+		...rest
+	} = props;
 
 	const [isEdited, setIsEdited] = useState(false);
 	const [checkedState, setCheckedState] = useState(completed);

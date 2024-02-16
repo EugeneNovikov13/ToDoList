@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setActiveAddInput } from '../../../../redux/actions/header';
 import { addTodo } from '../../../../redux/actions/to-do-list';
 import { AddButton, AddInput } from './components';
 
-export const AddBlock = () => {
+export const AddBlock: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const [addInputValue, setAddInputValue] = useState('');
+	const [addInputValue, setAddInputValue] = useState<string>('');
 
 	const onAddButtonClick = () => {
 		if (!addInputValue.length) return;
@@ -15,12 +15,10 @@ export const AddBlock = () => {
 		setAddInputValue('');
 	};
 
-	const onEnterKeyUp = e => {
-		if (e.key === 'Enter') onAddButtonClick();
-	};
-
-	const onChange = ({ target }) => {
-		setAddInputValue(target.value);
+	const onEnterKeyUp: React.KeyboardEventHandler<HTMLInputElement> = e => {
+		if (e.key === 'Enter') {
+			onAddButtonClick();
+		}
 	};
 
 	return (
@@ -29,7 +27,7 @@ export const AddBlock = () => {
 			<AddInput
 				value={addInputValue}
 				onKeyUp={e => onEnterKeyUp(e)}
-				onChange={onChange}
+				onChange={e => setAddInputValue(e.target.value)}
 				onFocus={() => dispatch(setActiveAddInput(true))}
 			/>
 		</>

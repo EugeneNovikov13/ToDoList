@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header, ToDoItem } from './components';
 import { sortToDosByOrderIndex } from './utils/utils';
 import { selectorSorted, selectorToDoList } from './redux/selectors';
 import { loadDatabaseAsync, updateTodo } from './redux/actions/to-do-list';
 import styles from './app.module.css';
-import { IToDo, IToDoList } from './types';
+import { IToDo, IToDoList, IToDoWithId } from './types';
 
-export const App = () => {
+export const App: React.FC = () => {
 	const sorted = useSelector(selectorSorted);
-	const [dragItem, setDragItem] = useState(null);
-	const [isDraggable, setIsDraggable] = useState(true);
+	const [dragItem, setDragItem] = useState<IToDoWithId>();
+	const [isDraggable, setIsDraggable] = useState<boolean>(true);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -19,17 +19,19 @@ export const App = () => {
 
 	const toDoList: IToDoList = useSelector(selectorToDoList);
 
-	const onDragStart = (id, item) => {
+	const DragStartHandler = (id: string, item: IToDo) => {
 		const dragItemIdObj = { id: `${id}` };
 		setDragItem({ ...dragItemIdObj, ...item });
 	};
 
-	const onDragOver = e => {
+	const DragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
 	};
 
-	const onDrop = (e, id, item) => {
+	const DropHandler = (e: React.DragEvent<HTMLDivElement>, id: string, item: IToDo) => {
 		e.preventDefault();
+
+		if (!dragItem) return;
 
 		if (id === dragItem.id) return;
 
@@ -52,7 +54,7 @@ export const App = () => {
 
 			{sorted
 				? Object.entries(toDoList)
-						.sort((toDoA: [string, IToDo], toDoB: [string, IToDo]) =>
+						.sort((toDoA, toDoB) =>
 							sortToDosByOrderIndex('text', toDoA[1], toDoB[1]),
 						)
 						.map(([id, todo]) => (
@@ -61,13 +63,13 @@ export const App = () => {
 								id={id}
 								item={todo}
 								draggable={false}
-								onDragStart={() => onDragStart(id, todo)}
-								onDragOver={onDragOver}
-								onDrop={e => onDrop(e, id, todo)}
+								onDragStart={() => DragStartHandler(id, todo)}
+								onDragOver={DragOverHandler}
+								onDrop={e => DropHandler(e, id, todo)}
 							/>
 						))
 				: Object.entries(toDoList)
-						.sort((toDoA: [string, IToDo], toDoB: [string, IToDo]) =>
+						.sort((toDoA, toDoB) =>
 							sortToDosByOrderIndex('orderIndex', toDoA[1], toDoB[1]),
 						)
 						.map(([id, todo]) => (
@@ -76,9 +78,9 @@ export const App = () => {
 								id={id}
 								item={todo}
 								draggable={isDraggable}
-								onDragStart={() => onDragStart(id, todo)}
-								onDragOver={onDragOver}
-								onDrop={e => onDrop(e, id, todo)}
+								onDragStart={() => DragStartHandler(id, todo)}
+								onDragOver={DragOverHandler}
+								onDrop={e => DropHandler(e, id, todo)}
 							/>
 						))}
 		</div>
