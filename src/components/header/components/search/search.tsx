@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from '../../../../hooks';
 import { selectorActiveAddInput } from '../../../../redux/selectors';
@@ -5,12 +6,12 @@ import { setActiveAddInput } from '../../../../redux/actions/header';
 import { searchByToDoList } from '../../../../redux/actions/to-do-list';
 import styles from './search.module.css';
 
-export const Search = () => {
+export const Search: React.FC = () => {
 	const dispatch = useDispatch();
-
+ 
 	const activeAddInput = useSelector(selectorActiveAddInput);
 
-	const debounceSearch = useDebounce(dispatch, 300);
+	const debounceSearch = useDebounce<string>(dispatch, 300);
 
 	return (
 		<input

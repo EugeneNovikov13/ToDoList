@@ -1,8 +1,14 @@
+import React from 'react';
 import styles from './to-do-text.module.css';
 
-export const ToDoText = ({ children, ...rest }) => {
+interface IToDoText {
+	onClick: () => void;
+	children: string;
+}
+
+export const ToDoText: React.FC<IToDoText> = ({ onClick, children }) => {
 	return (
-		<div className={styles.todoText} {...rest}>
+		<div className={styles.todoText} onClick={onClick}>
 			{children}
 		</div>
 	);

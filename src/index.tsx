@@ -5,11 +5,12 @@ import { store } from './store';
 import './index.css';
 import { App } from './app';
 
-const root: ReactDOM.Root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElement: HTMLElement | null = document.getElementById('root');
+if (!rootElement) throw new Error('Failed to find the root element');
+const root: ReactDOM.Root = ReactDOM.createRoot(rootElement);
+
 root.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<App />
-		</Provider>
-	</React.StrictMode>,
+	<Provider store={store}>
+		<App />
+	</Provider>,
 );

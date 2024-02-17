@@ -27,16 +27,16 @@ export const ToDoItem: React.FC<IToDoItemProps> = props => {
 	const [checkedState, setCheckedState] = useState(completed);
 	const [editedItemText, setEditedItemText] = useState(text || '');
 
-	const onCheckboxClick = () => {
+	const checkboxClickHandler = () => {
 		setCheckedState(!checkedState);
 		dispatch(updateTodo(id, { completed: !checkedState }));
 	};
 
-	const onEditedItemChange = ({ target }) => {
+	const itemChangeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
 		setEditedItemText(target.value);
 	};
 
-	const onEditedItemBlur = ({ target }) => {
+	const editedItemBlurHandler = ({ target }: React.FocusEvent<HTMLInputElement>) => {
 		if (target.value.length > 0) {
 			const upperCaseVal = target.value[0].toUpperCase() + target.value.slice(1);
 			dispatch(updateTodo(id, { text: upperCaseVal }));
@@ -48,17 +48,17 @@ export const ToDoItem: React.FC<IToDoItemProps> = props => {
 
 	return (
 		<div className={styles.todoItem} {...rest}>
-			<Checkbox completed={completed} onClick={onCheckboxClick} />
+			<Checkbox completed={completed} changeCheckbox={checkboxClickHandler} />
 			{isEdited ? (
 				<EditedItem
 					value={editedItemText}
-					onChange={onEditedItemChange}
-					onBlur={onEditedItemBlur}
+					itemChangeHandler={itemChangeHandler}
+					editedItemBlurHandler={editedItemBlurHandler}
 				/>
 			) : (
 				<ToDoText onClick={() => setIsEdited(true)}>{text}</ToDoText>
 			)}
-			<Delete onClick={() => dispatch(deleteTodo(id))} />
+			<Delete removeToDo={() => dispatch(deleteTodo(id))} />
 		</div>
 	);
 };

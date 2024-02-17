@@ -1,7 +1,8 @@
 import { ref, update } from 'firebase/database';
 import { db } from '../../../firebase';
 
-export const updateTodo = (id, obj) => dispatch => {
+//TODO типизировать obj
+export const updateTodo = (id: string, obj) => dispatch => {
 	const path = 'todos/' + id;
 
 	const toDoItemRef = ref(db, path);

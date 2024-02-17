@@ -4,13 +4,13 @@ import { Header, ToDoItem } from './components';
 import { sortToDosByOrderIndex } from './utils/utils';
 import { selectorSorted, selectorToDoList } from './redux/selectors';
 import { loadDatabaseAsync, updateTodo } from './redux/actions/to-do-list';
-import styles from './app.module.css';
 import { IToDo, IToDoList, IToDoWithId } from './types';
+import styles from './app.module.css';
 
 export const App: React.FC = () => {
 	const sorted = useSelector(selectorSorted);
-	const [dragItem, setDragItem] = useState<IToDoWithId>();
-	const [isDraggable, setIsDraggable] = useState<boolean>(true);
+	const [dragItem, setDragItem] = useState<IToDoWithId | null>(null);
+	const [isDraggable, setIsDraggable] = useState(true);
 	const dispatch = useDispatch();
 
 	useEffect(() => {

@@ -7,7 +7,7 @@ import { AddButton, AddInput } from './components';
 export const AddBlock: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const [addInputValue, setAddInputValue] = useState<string>('');
+	const [addInputValue, setAddInputValue] = useState('');
 
 	const onAddButtonClick = () => {
 		if (!addInputValue.length) return;
