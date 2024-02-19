@@ -1,9 +1,8 @@
 import { Checkbox, Delete, EditedItem, ToDoText } from './components';
 import React, { useState } from 'react';
-import { deleteTodo, updateTodo } from '../../redux/actions/to-do-list';
-import { useDispatch } from 'react-redux';
-import styles from './to-do-item.module.css';
+import { useActions } from '../../hooks';
 import { IToDo } from '../../types';
+import styles from './to-do-item.module.css';
 
 interface IToDoItemProps {
 	id: string;
@@ -15,13 +14,13 @@ interface IToDoItemProps {
 }
 
 export const ToDoItem: React.FC<IToDoItemProps> = props => {
-	const dispatch = useDispatch();
-
 	const {
 		id,
 		item: { text, completed },
 		...rest
 	} = props;
+
+	const { updateTodo, deleteTodo } = useActions();
 
 	const [isEdited, setIsEdited] = useState(false);
 	const [checkedState, setCheckedState] = useState(completed);
@@ -29,7 +28,7 @@ export const ToDoItem: React.FC<IToDoItemProps> = props => {
 
 	const checkboxClickHandler = () => {
 		setCheckedState(!checkedState);
-		dispatch(updateTodo(id, { completed: !checkedState }));
+		updateTodo(id, { completed: !checkedState });
 	};
 
 	const itemChangeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,10 +38,10 @@ export const ToDoItem: React.FC<IToDoItemProps> = props => {
 	const editedItemBlurHandler = ({ target }: React.FocusEvent<HTMLInputElement>) => {
 		if (target.value.length > 0) {
 			const upperCaseVal = target.value[0].toUpperCase() + target.value.slice(1);
-			dispatch(updateTodo(id, { text: upperCaseVal }));
+			updateTodo(id, { text: upperCaseVal });
 			setIsEdited(false);
 		} else {
-			dispatch(deleteTodo(id));
+			deleteTodo(id);
 		}
 	};
 
@@ -58,7 +57,7 @@ export const ToDoItem: React.FC<IToDoItemProps> = props => {
 			) : (
 				<ToDoText onClick={() => setIsEdited(true)}>{text}</ToDoText>
 			)}
-			<Delete removeToDo={() => dispatch(deleteTodo(id))} />
+			<Delete removeToDo={() => deleteTodo(id)} />
 		</div>
 	);
 };

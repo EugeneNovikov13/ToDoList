@@ -7,6 +7,9 @@ const reducer = combineReducers({
 	headerState: headerReducer,
 });
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export type RootState = ReturnType<typeof reducer>;
+
+const composeEnhancers =
+	(window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] as typeof compose) || compose;
 
 export const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));

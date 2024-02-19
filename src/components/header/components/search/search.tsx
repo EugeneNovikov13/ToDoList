@@ -1,17 +1,13 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useDebounce } from '../../../../hooks';
-import { selectorActiveAddInput } from '../../../../redux/selectors';
-import { setActiveAddInput } from '../../../../redux/actions/header';
-import { searchByToDoList } from '../../../../redux/actions/to-do-list';
+import { useActions, useDebounce, useTypedSelector } from '../../../../hooks';
 import styles from './search.module.css';
 
 export const Search: React.FC = () => {
-	const dispatch = useDispatch();
- 
-	const activeAddInput = useSelector(selectorActiveAddInput);
+	const { searchByToDoList, setActiveAddInput } = useActions();
 
-	const debounceSearch = useDebounce<string>(dispatch, 300);
+	const activeAddInput = useTypedSelector(state => state.headerState.activeAddInput);
+
+	const debouncedSearch = useDebounce<string>(searchByToDoList, 300);
 
 	return (
 		<input
@@ -20,8 +16,8 @@ export const Search: React.FC = () => {
 			}
 			type="text"
 			placeholder="Найти..."
-			onFocus={() => dispatch(setActiveAddInput(false))}
-			onChange={({ target }) => debounceSearch(searchByToDoList(target.value))}
+			onFocus={() => setActiveAddInput(false)}
+			onChange={({ target }) => debouncedSearch(target.value)}
 		></input>
 	);
 };

@@ -1,7 +1,6 @@
-import { useSelector } from 'react-redux';
-import { selectorActiveAddInput } from '../../../../../../redux/selectors';
-import styles from './add-input.module.css';
 import React from 'react';
+import { useTypedSelector } from '../../../../../../hooks';
+import styles from './add-input.module.css';
 
 interface IAddInputProps {
 	value: string;
@@ -11,7 +10,7 @@ interface IAddInputProps {
 }
 
 export const AddInput: React.FC<IAddInputProps> = props => {
-	const activeAddInput = useSelector(selectorActiveAddInput);
+	const activeAddInput = useTypedSelector(state => state.headerState.activeAddInput);
 
 	return (
 		<input

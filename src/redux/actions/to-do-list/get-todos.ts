@@ -1,15 +1,15 @@
 import { get, ref } from 'firebase/database';
 import { db } from '../../../firebase';
-import { IToDoList } from '../../../types';
+import { Dispatch } from 'redux';
+import { IToDoList, ToDoAction, ToDoActionTypes } from '../../../types';
 
-export const loadDatabaseAsync = dispatch => {
+export const loadDatabaseAsync = () => (dispatch: Dispatch<ToDoAction>) => {
 	const toDoDbRef = ref(db, 'todos');
 	try {
 		get(toDoDbRef).then(snapshot => {
 			const loadedToDos: IToDoList = snapshot.val() || {};
-			console.log('requestGetToDos', loadedToDos);
 			dispatch({
-				type: 'LOAD_DATABASE',
+				type: ToDoActionTypes.LOAD_DATABASE,
 				payload: loadedToDos,
 			});
 		});

@@ -1,7 +1,9 @@
+import { Dispatch } from 'redux';
 import { ref, remove } from 'firebase/database';
 import { db } from '../../../firebase';
+import { ToDoAction, ToDoActionTypes } from '../../../types';
 
-export const deleteTodo = id => dispatch => {
+export const deleteTodo = (id: string) => (dispatch: Dispatch<ToDoAction>) => {
 	const path = 'todos/' + id;
 
 	const toDoItemRef = ref(db, path);
@@ -9,7 +11,7 @@ export const deleteTodo = id => dispatch => {
 	remove(toDoItemRef).then(() => {
 		console.log('Запись удалена');
 		dispatch({
-			type: 'REMOVE_TODO',
+			type: ToDoActionTypes.REMOVE_TODO,
 			payload: id,
 		});
 	});

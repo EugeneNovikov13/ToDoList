@@ -1,18 +1,23 @@
-export const headerInitialState = {
+import { HeaderAction, HeaderActionTypes, IHeaderState } from '../../types';
+
+export const headerInitialState: IHeaderState = {
 	sorted: false,
 	activeAddInput: true,
 };
 
-export const headerReducer = (state = headerInitialState, action) => {
+export const headerReducer = (
+	state = headerInitialState,
+	action: HeaderAction,
+): IHeaderState => {
 	const { type, payload } = action;
 
 	switch (type) {
-		case 'SET_ACTIVE_ADD_INPUT':
+		case HeaderActionTypes.SET_ACTIVE_ADD_INPUT:
 			return {
 				...state,
 				activeAddInput: payload,
 			};
-		case 'SET_SORTED':
+		case HeaderActionTypes.SET_SORTED:
 			return {
 				...state,
 				sorted: payload,

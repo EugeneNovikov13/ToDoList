@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { selectorSorted } from '../../../../redux/selectors';
-import { setSorted } from '../../../../redux/actions/header/set-sorted';
+import { useTypedSelector } from '../../../../hooks';
+import { useDispatch } from 'react-redux';
+import { setSorted } from '../../../../redux/actions/header';
 import styles from './sort-button.module.css';
 
 export const SortButton = () => {
 	const dispatch = useDispatch();
 
-	const sorted = useSelector(selectorSorted);
+	const sorted = useTypedSelector(state => state.headerState.sorted);
 
 	return (
 		<button

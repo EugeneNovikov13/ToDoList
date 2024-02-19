@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Header, ToDoItem } from './components';
+import { useActions, useTypedSelector } from './hooks';
 import { sortToDosByOrderIndex } from './utils/utils';
-import { selectorSorted, selectorToDoList } from './redux/selectors';
-import { loadDatabaseAsync, updateTodo } from './redux/actions/to-do-list';
+import { Header, ToDoItem } from './components';
 import { IToDo, IToDoList, IToDoWithId } from './types';
 import styles from './app.module.css';
 
 export const App: React.FC = () => {
-	const sorted = useSelector(selectorSorted);
+	const sorted = useTypedSelector(state => state.headerState.sorted);
 	const [dragItem, setDragItem] = useState<IToDoWithId | null>(null);
 	const [isDraggable, setIsDraggable] = useState(true);
-	const dispatch = useDispatch();
+	const { loadDatabaseAsync, updateTodo } = useActions();
 
 	useEffect(() => {
-		dispatch(loadDatabaseAsync);
+		loadDatabaseAsync();
 	}, []);
 
-	const toDoList: IToDoList = useSelector(selectorToDoList);
+	const toDoList: IToDoList = useTypedSelector(useState => useState.toDoListState);
 
 	const DragStartHandler = (id: string, item: IToDo) => {
 		const dragItemIdObj = { id: `${id}` };
@@ -43,8 +41,8 @@ export const App: React.FC = () => {
 			orderIndex: dragItem.orderIndex,
 		};
 		setIsDraggable(false);
-		dispatch(updateTodo(dragItem.id, newDragToDoObj));
-		dispatch(updateTodo(id, newDropToDoObj));
+		updateTodo(dragItem.id, newDragToDoObj);
+		updateTodo(id, newDropToDoObj);
 		setIsDraggable(true);
 	};
 
