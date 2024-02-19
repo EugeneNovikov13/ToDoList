@@ -3,16 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@redux-devtools/extension": "^3.3.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/node": "^20.11.18",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "firebase": "^9.23.0",
+    "firebase": "^10.1.0",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.1.2",
     "react-scripts": "5.0.1",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2",
+    "typescript": "^5.3.3",
     "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
   },
@@ -43,5 +51,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "overrides": {
+    "react-scripts": {
+      "typescript": "^5"
+    }
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.8",
+    "typescript-plugin-css-modules": "^5.1.0"
   }
 }

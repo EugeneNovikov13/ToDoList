@@ -1,0 +1,14 @@
+.addButton {
+	width: 40px;
+	height: 40px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	font-size: 34px;
+	background-color: white;
+}
+
+.addButton:enabled {
+	color: #3AB37C;
+	border: 2px solid #3AB37C;
+	cursor: pointer;
+}
