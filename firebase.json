@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "to-do-list-result",
     "public": "build",
     "ignore": [
       "firebase.json",
